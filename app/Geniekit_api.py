@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from Geniekit import generate_branding_snippet, generate_keywords
+from mangum import Mangum
 
 app = FastAPI()
-
+handler = Mangum(app)
 MAX_INPUT_LENGTH =32
 
 @app.get("/generate_snippet")
@@ -30,4 +31,4 @@ def validate_input_length(prompt: str):
         raise HTTPException(status_code=400, detail=f"Input length is too long. Must be under{MAX_INPUT_LENGTH} characters.")
     pass
 
-#uvicorn Geniekitt_api --> reload
+#uvicorn Geniekitt_api --> reloadcd
